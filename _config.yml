@@ -1,3 +1,4 @@
 name: Tim Watrous 
 markdown: kramdown
 remote_theme: jamigibbs/phantom
+nav_enable: false
