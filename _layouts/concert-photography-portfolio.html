@@ -9,45 +9,68 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-01.jpg">
+            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-01-blur.jpg" data-src="/img/concert-photography-portfolio-01.jpg">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-02.jpg">
+            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-02-blur.jpg" data-src="/img/concert-photography-portfolio-02.jpg" loading="lazy">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-03.jpg">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography-portfolio-03.jpg" loading="lazy">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-04.jpg">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography-portfolio-04.jpg" loading="lazy">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-05.jpg">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography-portfolio-05.jpg" loading="lazy">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-06.jpg">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography-portfolio-06.jpg" loading="lazy">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-07.jpg">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography-portfolio-07.jpg" loading="lazy">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/concert-photography-portfolio-08.jpg">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography-portfolio-08.jpg" loading="lazy">
           </div>
         </div>
       </div>
     </main>
+
+    <script>
+      // Get all the images on the page
+      const images = document.querySelectorAll('img[data-src]');
+
+      // Function to load the image
+      const loadImage = (image) => {
+        // Get the data-src attribute value
+        const src = image.getAttribute('data-src');
+
+        // When the image has loaded, set the src attribute of the original image element to the data-src value
+        image.src = src;
+      };
+      // Load images that are in the viewport
+      const lazyLoad = () => {
+        images.forEach((image) => {
+          loadImage(image);
+        });
+      };
+
+      // Load images when the page loads and when the user scrolls
+      window.addEventListener('load', lazyLoad);
+    </script>
 
 {% include footer.html %}
