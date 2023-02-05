@@ -82,15 +82,29 @@
         // When the image has loaded, set the src attribute of the original image element to the data-src value
         image.src = src;
       };
+
+      // Check if an image is in the viewport with an offset of 2000 pixels
+      const isInViewport = (image) => {
+        const rect = image.getBoundingClientRect();
+        const offset = 3000;
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) + offset &&
+          rect.bottom >= -offset
+        );
+      };
+
       // Load images that are in the viewport
       const lazyLoad = () => {
         images.forEach((image) => {
-          loadImage(image);
+          if (isInViewport(image)) {
+                loadImage(image);
+            }
         });
       };
 
       // Load images when the page loads and when the user scrolls
       window.addEventListener('load', lazyLoad);
+      window.addEventListener('scroll', lazyLoad);
     </script>
 
 {% include footer.html %}
