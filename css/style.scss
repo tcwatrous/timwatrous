@@ -15,9 +15,12 @@
 
 @import '../_sass/bootstrap';
 @import '../_sass/mixins';
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&family=Open+Sans&display=swap');
 
 $primary: #0a0a0a;
 $secondary: #FF7B7B;
+$text-white: #F8F0E3;
+$bg-black: #202022;
 
 @font-face {
   font-family: 'Inter';
@@ -46,9 +49,19 @@ $secondary: #FF7B7B;
        url('../fonts/libre-baskerville-v14-latin-regular.svg#LibreBaskerville') format('svg'); /* Legacy iOS */
 }
 
-%bodytext { font-family: 'Libre Baskerville', serif; }
-%inter { font-family: 'Inter', serif; }
+// @font-face {
+//   font-family: 'Barlow Condensed';
+//   font-style: normal;
+//   font-weight: 400;
+//   src: url('../fonts/BarlowCondensed-Medium.ttf'); /* IE9 Compat Modes */
+//   src: local(''),
+//        url('../fonts/BarlowCondensed-Medium.ttf') format('truetype'); /* Safari, Android, iOS */
+// }
 
+
+%bodytext { font-family: 'Open Sans', serif; }
+%inter { font-family: 'Inter', serif; }
+%header {font-family: 'Barlow Condensed', serif}
 /*--------------------------------------------------------------
 	1.0 Defaults
 --------------------------------------------------------------*/
@@ -60,13 +73,14 @@ $secondary: #FF7B7B;
 }
 
 body {
-  background-color: #e9edf0;
+  background-color: $bg-black;
   @extend %bodytext;
+  color:$text-white;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @extend %inter;
+  @extend %header;
   // font-weight: 700;
 }
 
@@ -81,8 +95,8 @@ p {
 
 a {
   @include transition(color .2s ease-in-out);
-  @extend %inter;
-  color:black;
+  color:$text-white;
+  text-decoration: underline;
   &:hover {
     color: #FF5B33;
     text-decoration: none;
@@ -92,6 +106,12 @@ a {
 img {
   width: 100%;
 }
+
+.img-portfolio {
+
+  margin-bottom: 1em;
+}
+
 
 button.btn, input.btn {
   padding: 12px 35px;
@@ -117,7 +137,7 @@ button.btn, input.btn {
 }
 
 .main {
-  background-color: white;
+  background-color: $bg-black;
   // border-left: solid 1px #cedfea;
   // border-right: solid 1px #cedfea;
   &.container {
@@ -137,6 +157,32 @@ button.btn, input.btn {
   }
 }
 
+.navbar-toggle {
+  border:none;
+}
+.site-footer p {
+  font-weight:normal;
+}
+.portfolio-header {
+  margin-bottom:1em;
+}
+
+.nav-max {
+  max-width:1200px;
+}
+.navbar-default {
+  @extend %header;
+  background-color: $bg-black;
+  color: $text-color;
+  border:none;
+  a {
+    text-decoration: none;
+  }
+}
+
+.text-muted {
+  color: #888;
+}
 /*--------------------------------------------------------------
 	2.0 Home Hero
 --------------------------------------------------------------*/
@@ -165,12 +211,13 @@ button.btn, input.btn {
   }
   h1 {
     font-size: 48px;
+    margin-bottom: 1em;
   }
   p {
-    margin: 2em 0 4em 0;
+
   }
   .hero-buttons {
-    margin: 0 auto;
+    margin: 4em auto 0;
     display: table;
     i {
       padding-right: 0.5em;
@@ -180,7 +227,7 @@ button.btn, input.btn {
 
 .hero-social-icons {
   font-size:2em;
-  color:black;
+  color:$text-white;
   &:hover {
     color: #FF5B33;
     text-decoration: none;
@@ -244,7 +291,7 @@ button.btn, input.btn {
 	3.0 Posts
 --------------------------------------------------------------*/
 #portfolio .container {
-  margin-top: 10em;
+  margin-top: 4em;
   @include bp-xsmall {
     margin-top: 2em;
   }
@@ -360,7 +407,7 @@ button.btn, input.btn {
   p {
     font-size: 12px;
     font-weight: 600;
-    color: #9eb1bd;
+    color: #888;
     margin: 0;
     padding: 10px 0;
     @include bp-xsmall {

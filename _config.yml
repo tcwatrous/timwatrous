@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "Tim Watrous"
+title: "tim watrous"
 email: 't.watrous@gmail.com'
-description: "Taking life one existential crisis at a time."
+description: "taking life one existential crisis at a time."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://timwatro.us" # the base hostname & protocol for your site, e.g. https://example.com
 instagram_username: 'tcwatrous'
@@ -91,13 +91,12 @@ pagination:
 ############################################################
 
 ### Phantom settings
-footer_text: '© 2022 Tim Watrous'
-admin_name: 'Tim Watrous'
+footer_text: '© 2023 tim watrous'
+admin_name: 'tim watrous'
 google_analytics: "UA-9999999-99" # Update with your own tracking ID
 enable_contact: false
 
 #### Phantom Navigation menu
-enable_nav: false
+enable_nav: true
 nav_item:
-  - { url: '/', text: 'Home' }
-  - { url: '/about', text: 'About' }
+  - { url: '/concert-photography-portfolio', text: 'concert' }
