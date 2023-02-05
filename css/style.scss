@@ -97,9 +97,15 @@ a {
   @include transition(color .2s ease-in-out);
   color:$text-white;
   text-decoration: underline;
+  outline:0;
   &:hover {
     color: #FF5B33;
     text-decoration: none;
+    outline:0;
+  }
+  &:focus {
+    color: #FF5B33;
+    outline:0;
   }
 }
 
