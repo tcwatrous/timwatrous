@@ -76,23 +76,24 @@
       // images.forEach((image) => {
       //   console.log(image.getAttribute('data-src'))
       // });
+      document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll(".img-portfolio");
+        let currentImage = 0;
 
-      const images = document.querySelectorAll(".img-portfolio");
-      let currentImage = 0;
-
-      const loadNextImage = () => {
-        if (currentImage >= images.length) return;
-        const image = images[currentImage];
-        const dataSrc = image.getAttribute("data-src");
-        image.src = dataSrc;
-        console.log("loading image: " + image.src);
-        image.onload = () => {
-          currentImage++;
-          loadNextImage();
+        const loadNextImage = () => {
+          if (currentImage >= images.length) return;
+          const image = images[currentImage];
+          const dataSrc = image.getAttribute("data-src");
+          image.src = dataSrc;
+          console.log("loading image: " + image.src);
+          image.onload = () => {
+            currentImage++;
+            loadNextImage();
+          };
         };
-      };
 
-      loadNextImage();
+        loadNextImage();
+      }, false);
 
       //     // Function to load the image
       //     const loadImage = (image) => {
