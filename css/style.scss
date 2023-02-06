@@ -186,6 +186,12 @@ button.btn, input.btn {
     text-decoration: none;
   }
 }
+.navbar-default .navbar-brand {
+  color: $text-white;
+}
+.navbar-default .navbar-nav > li > a {
+  color: $text-white;
+}
 
 .text-muted {
   color: #888;
