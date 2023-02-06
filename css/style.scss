@@ -180,7 +180,7 @@ button.btn, input.btn {
 .navbar-default {
   @extend %header;
   background-color: $bg-black;
-  color: $text-color;
+  color: $text-white;
   border:none;
   a {
     text-decoration: none;
@@ -233,6 +233,7 @@ button.btn, input.btn {
 }
 
 .hero-social-icons {
+  @include transition(color .2s ease-in-out);
   font-size:2em;
   color:$text-white;
   &:hover {
