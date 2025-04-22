@@ -1,0 +1,137 @@
+{% include header.html %}
+
+    <main id="portfolio">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="portfolio-header">event photography</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" src="/img/concert-photography//img01-blur.jpg" alt="music artist eden singing on a dark stage dramatically backlit by two spotlights" data-src="/img/concert-photography/01.jpg">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" src="/img/concert-photography/02-blur.jpg" alt="slenderbodies singer max singing, backlit by orange, magenta, and blue stage lights" data-src="/img/concert-photography/02.jpg" loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/03.jpg" alt="overhead shot of eden on stage lit only by red lights and a cone of red lasers" loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/04.jpg" alt="eden and drummer backlit by a single blue light" loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/05.jpg" alt="slenderbodies on stage raising hands for a crowd cue with the crowd reciprocating"loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/06.jpg" alt="ghostly long exposure of slenderbodies guitarist benji giving a trail behind him" loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/07.jpg" alt="long exposure of slenderbodies on stage with dramatic light trails horizontal across the stage" loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/08.jpg" alt="composite image of glassio at elsewhere performing a solo act with rainbow backlights streaked across the frame" loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/09.jpg" alt="erik brock on a flowering white background stage with the woods behind. shot on film" loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/10.jpg" alt="double exposure on film of the solaura dj stage with bubbles and crowd dancing"loading="lazy">
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/11.jpg" alt="long exposure of slenderbodies' max with blue black lighting, horzintal streaks across the image" loading="lazy">
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/12.jpg" alt="wide stage shot of slenderbodies long exposure, long vertical green streaks from the overhead spotlights" loading="lazy">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-responsive img-portfolio" data-src="/img/concert-photography/13.jpg" alt="mt.joy frontman matt quinn at solaura festival with vibrant blue and magenta stage lighting" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Get all the images on the page
+      // const images = document.querySelectorAll('img[data-src]');
+      // images.forEach((image) => {
+      //   console.log(image.getAttribute('data-src'))
+      // });
+      document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll(".img-portfolio");
+        let currentImage = 0;
+
+        const loadNextImage = () => {
+          if (currentImage >= images.length) return;
+          const image = images[currentImage];
+          const dataSrc = image.getAttribute("data-src");
+          image.src = dataSrc;
+          console.log("loading image: " + image.src);
+          image.onload = () => {
+            currentImage++;
+            loadNextImage();
+          };
+        };
+
+        loadNextImage();
+      }, false);
+
+      //     // Function to load the image
+      //     const loadImage = (image) => {
+      //       // Get the data-src attribute value
+      //       const src = image.getAttribute('data-src');
+      //
+      //       // When the image has loaded, set the src attribute of the original image element to the data-src value
+      //       image.src = src;
+      //       console.log("loading image: " + image.src)
+      // };
+
+      // // Check if an image is in the viewport with an offset of 2000 pixels
+      // const isInViewport = (image) => {
+      //   const rect = image.getBoundingClientRect();
+      //   const offset = 3000;
+      //   return (
+      //     rect.top <= (window.innerHeight || document.documentElement.clientHeight) + offset &&
+      //     rect.bottom >= -offset
+      //   );
+      // };
+      //
+      // // Load images that are in the viewport
+      // const lazyLoad = () => {
+      //   images.forEach((image) => {
+      //     if (isInViewport(image)) {
+      //           loadImage(image);
+      //       }
+      //   });
+      // };
+      //
+      // // Load images when the page loads and when the user scrolls
+      // window.addEventListener('load', lazyLoad);
+      // window.addEventListener('scroll', lazyLoad);
+    </script>
+
+{% include footer.html %}
