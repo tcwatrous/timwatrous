@@ -1,137 +1,163 @@
 {% include header.html %}
 
     <main id="portfolio">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="portfolio-header">event photography</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/event-photography/img01-blur.jpg" alt="" data-src="/img/event-photography/01.jpg">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" src="/img/event-photography/02-blur.jpg" alt="" data-src="/img/event-photography/02.jpg" loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/03.jpg" alt="" loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/04.jpg" alt="" loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/05.jpg" alt=""loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/06.jpg" alt="" loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/07.jpg" alt="" loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/08.jpg" alt="" loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/09.jpg" alt="" loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/10.jpg" alt=""loading="lazy">
-          </div>
-        </div>
-        <!-- <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/11.jpg" alt="long exposure of slenderbodies' max with blue black lighting, horzintal streaks across the image" loading="lazy">
-          </div>
-        </div> -->
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/12.jpg" alt="" loading="lazy">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-responsive img-portfolio" data-src="/img/event-photography/13.jpg" alt="" loading="lazy">
-          </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="portfolio-header">event photography</h1>
       </div>
-    </main>
+    </div>
 
-    <script>
-      // Get all the images on the page
-      // const images = document.querySelectorAll('img[data-src]');
-      // images.forEach((image) => {
-      //   console.log(image.getAttribute('data-src'))
-      // });
-      document.addEventListener('DOMContentLoaded', function() {
-        const images = document.querySelectorAll(".img-portfolio");
-        let currentImage = 0;
+    <!-- 📸 Portfolio Grid Start -->
+    <div class="portfolio-grid">
+      {% for item in site.data.portfolio %}
+        <img
+          class="img-portfolio"
+          src="{{ item.src | replace: '.jpg', '-blur.jpg' }}"
+          data-src="{{ item.src }}"
+          alt="{{ item.alt | default: '' }}"
+          height="{{ item.height }}"
+          width="{{ item.width }}"
+          style="height: auto;"
+          loading="eager"
+          draggable="false"
+        />
+      {% endfor %}
+    </div>
+    <!-- 📸 Portfolio Grid End -->
 
-        const loadNextImage = () => {
-          if (currentImage >= images.length) return;
-          const image = images[currentImage];
-          const dataSrc = image.getAttribute("data-src");
-          image.src = dataSrc;
-          console.log("loading image: " + image.src);
-          image.onload = () => {
-            currentImage++;
-            loadNextImage();
-          };
-        };
+    <!-- Lightbox container (hidden by default) -->
+ <div id="lightbox">
+  <button id="lightbox-prev" class="lightbox-nav">&lt;</button>
+  <img id="lightbox-img" src="" alt="" />
+  <button id="lightbox-next" class="lightbox-nav">&gt;</button>
+</div>
+  </div>
+</main>
 
-        loadNextImage();
-      }, false);
 
-      //     // Function to load the image
-      //     const loadImage = (image) => {
-      //       // Get the data-src attribute value
-      //       const src = image.getAttribute('data-src');
-      //
-      //       // When the image has loaded, set the src attribute of the original image element to the data-src value
-      //       image.src = src;
-      //       console.log("loading image: " + image.src)
-      // };
 
-      // // Check if an image is in the viewport with an offset of 2000 pixels
-      // const isInViewport = (image) => {
-      //   const rect = image.getBoundingClientRect();
-      //   const offset = 3000;
-      //   return (
-      //     rect.top <= (window.innerHeight || document.documentElement.clientHeight) + offset &&
-      //     rect.bottom >= -offset
-      //   );
-      // };
-      //
-      // // Load images that are in the viewport
-      // const lazyLoad = () => {
-      //   images.forEach((image) => {
-      //     if (isInViewport(image)) {
-      //           loadImage(image);
-      //       }
-      //   });
-      // };
-      //
-      // // Load images when the page loads and when the user scrolls
-      // window.addEventListener('load', lazyLoad);
-      // window.addEventListener('scroll', lazyLoad);
-    </script>
+<!-- 🖼 Lazy Load Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+
+    // loading images
+    const imagesLoading = document.querySelectorAll('img[data-src]');
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const fullSrc = img.getAttribute('data-src');
+            if (fullSrc) {
+              const fullImg = new Image();
+              fullImg.src = fullSrc;
+              fullImg.onload = () => {
+                img.src = fullSrc;
+                img.removeAttribute('data-src');
+                img.classList.add('loaded');
+              };
+            }
+            obs.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '300px',
+        threshold: 0.01
+      });
+
+      imagesLoading.forEach(img => observer.observe(img));
+    } else {
+      // Fallback: load all full images immediately
+      imagesLoading.forEach(img => {
+        const fullSrc = img.getAttribute('data-src');
+        if (fullSrc) {
+          img.src = fullSrc;
+          img.removeAttribute('data-src');
+        }
+      });
+    }
+    
+
+
+
+
+    // lightbox functionality
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+
+    // Gather all images in the portfolio into an array
+    const images = Array.from(document.querySelectorAll('.img-portfolio'));
+    let currentIndex = -1;
+
+    function showLightbox(index) {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      currentIndex = index;
+      const img = images[index];
+      lightboxImg.src = img.dataset.src || img.src;
+      lightbox.classList.add('visible');
+    }
+
+    // Open lightbox on image click (only if viewport >= 600)
+    images.forEach((img, index) => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        if (window.innerWidth >= 600) {
+          showLightbox(index);
+        }
+      });
+    });
+
+    
+
+    // Close lightbox clicking outside or ESC key
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox || e.target === lightboxImg) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('visible')) {
+        closeLightbox();
+      }
+      if (lightbox.classList.contains('visible')) {
+        if (e.key === 'ArrowRight') {
+          showLightbox(currentIndex + 1);
+        }
+        if (e.key === 'ArrowLeft') {
+          showLightbox(currentIndex - 1);
+        }
+      }
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showLightbox(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showLightbox(currentIndex + 1);
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('visible');
+      setTimeout(() => {
+        lightboxImg.src = '';
+      }, 300);
+    }
+
+
+
+    //end
+  });
+</script>
 
 {% include footer.html %}

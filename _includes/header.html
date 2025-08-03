@@ -28,6 +28,112 @@
   <!-- Styles -->
   <link rel="stylesheet" href="{{ "/css/animate.min.css" | prepend: site.baseurl }}">
   <link rel="stylesheet" href="{{ "/css/style.css" | prepend: site.baseurl }}">
+  <!-- 💅 CSS for Format-style Grid -->
+  <style>
+.portfolio-grid {
+  column-count: 1;
+  column-gap: 1rem;
+  padding-top: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .portfolio-grid {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 900px) {
+  .portfolio-grid {
+    column-count: 3;
+  }
+}
+
+.img-portfolio {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+.img-portfolio:hover {
+  transform: scale(1.02);
+}
+#lightbox {
+  /* your existing styles... */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+#lightbox.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 20px black;
+  object-fit: contain;
+  user-select: none;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  z-index: 1100;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+#lightbox-prev {
+  left: 1rem;
+}
+
+#lightbox-next {
+  right: 1rem;
+}
+.img-portfolio {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+.img-portfolio.loaded {
+  filter: none;
+  opacity: 1;
+}
+
+
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KEQGVBM7HM"></script>

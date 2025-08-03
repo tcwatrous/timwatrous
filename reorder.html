@@ -1,0 +1,235 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reorder Portfolio Images</title>
+  <style>
+        body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #000;
+      color: #222;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* Your multi-column portfolio grid style */
+    #sortable-grid {
+      column-count: 1;
+      column-gap: 1rem;
+      padding-top: 1.5rem;
+    }
+
+    @media (min-width: 600px) {
+      #sortable-grid {
+        column-count: 2;
+      }
+    }
+
+    @media (min-width: 900px) {
+      #sortable-grid {
+        column-count: 3;
+      }
+    }
+
+    #sortable-grid li {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      cursor: grab;
+      list-style: none;
+    }
+
+    .img-portfolio {
+      width: 100%;
+      height: auto; /* natural height */
+      display: block;
+      border-radius: 4px;
+      transition: transform 0.2s ease;
+      user-select: none;
+    }
+
+    .img-portfolio:hover {
+      transform: scale(1.02);
+    }
+
+    button {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    pre {
+      background: #f7f7f7;
+      padding: 1rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Reorder Portfolio Images</h1>
+  <p>Drag and drop images to reorder them. When done, click <strong>Export YAML</strong> and paste the output into your <code>_data/portfolio.yml</code>.</p>
+
+ <ul id="sortable-grid" class="sortable-grid">
+  {% for item in site.data.portfolio %}
+    <li class="sortable-item" data-src="{{ item.src }}">
+      <img
+        class="img-portfolio"
+        src="{{ item.src | replace: '.jpg', '-blur.jpg' }}"
+        alt="{{ item.alt | default: '' }}"
+        draggable="false"
+      />
+    </li>
+  {% endfor %}
+</ul>
+  <button id="export-btn">Export YAML</button>
+
+  <h2>Output YAML:</h2>
+  <pre id="output"></pre>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script>
+   // Remove the old portfolioData array and loadGrid function
+
+    const list = document.getElementById('sortable-grid');
+    const output = document.getElementById('output');
+
+    // Initialize SortableJS
+    const sortable = Sortable.create(list, {
+    animation: 150,
+    ghostClass: 'dragging',
+    dragClass: 'dragging',
+    swap: true,
+    swapClass: 'sortable-swap-highlight',
+    fallbackOnBody: true,
+    swapThreshold: 0.65
+    });
+
+    // Export YAML on button click
+    document.getElementById('export-btn').addEventListener('click', () => {
+    const items = [...list.children];
+    const newOrder = items.map(li => ({
+        src: li.getAttribute('data-src'),
+        alt: li.querySelector('.img-caption')?.textContent.trim() || ''
+    }));
+
+    const yaml = newOrder.map(item =>
+        `- src: ${item.src}\n  alt: "${item.alt}"`
+    ).join('\n');
+
+    output.textContent = yaml;
+    });
+  </script>
+
+
+
+<!-- <script>
+    // Replace with your actual portfolio image data
+    const portfolioData = [
+      { src: "/img/event-photography/01.jpg" },
+      { src: "/img/event-photography/02.jpg" },
+      { src: "/img/event-photography/03.jpg" },
+      { src: "/img/event-photography/04.jpg" },
+      { src: "/img/event-photography/05.jpg" },
+      { src: "/img/event-photography/06.jpg" },
+      { src: "/img/event-photography/07.jpg" },
+      { src: "/img/event-photography/08.jpg" },
+      { src: "/img/event-photography/09.jpg" },
+      { src: "/img/event-photography/10.jpg" },
+      { src: "/img/event-photography/11.jpg" },
+      { src: "/img/event-photography/12.jpg" },
+      { src: "/img/event-photography/13.jpg" },
+      { src: "/img/event-photography/14.jpg" },
+      { src: "/img/event-photography/15.jpg" },
+      { src: "/img/event-photography/16.jpg" },
+      { src: "/img/event-photography/17.jpg" },
+      { src: "/img/event-photography/18.jpg" },
+      { src: "/img/event-photography/19.jpg" },
+      { src: "/img/event-photography/20.jpg" },
+      { src: "/img/event-photography/21.jpg" },
+      { src: "/img/event-photography/22.jpg" },
+      { src: "/img/event-photography/23.jpg" },
+      { src: "/img/event-photography/24.jpg" },
+      { src: "/img/event-photography/25.jpg" },
+      { src: "/img/event-photography/26.jpg" },
+      { src: "/img/event-photography/27.jpg" },
+      { src: "/img/event-photography/28.jpg" },
+      { src: "/img/event-photography/29.jpg" }
+    ];
+
+    const list = document.getElementById('sortable-grid');
+    const output = document.getElementById('output');
+
+    // Populate the grid with images
+    function loadGrid() {
+      portfolioData.forEach(item => {
+        const li = document.createElement('li');
+        li.setAttribute('data-src', item.src);
+        li.classList.add('sortable-item');
+        li.innerHTML = `
+          <img class="img-portfolio" src="${item.src}" alt="${item.alt}" draggable="false" />
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    loadGrid();
+
+    // Initialize SortableJS for grid with swapping
+    const sortable = Sortable.create(list, {
+      animation: 150,
+      ghostClass: 'dragging',
+      dragClass: 'dragging',
+      swap: true,
+      swapClass: 'sortable-swap-highlight',
+      fallbackOnBody: true,
+      swapThreshold: 0.65
+    });
+
+    // Convert array of objects to YAML string
+    function toYAML(arr) {
+      return arr.map(item => `- src: ${item.src}\n  alt: "${item.alt}"`).join('\n');
+    }
+
+    // Export YAML on button click
+    document.getElementById('export-btn').addEventListener('click', () => {
+      const items = [...list.children];
+      const newOrder = items.map(li => ({
+        src: li.getAttribute('data-src'),
+        alt: li.querySelector('.img-caption').textContent.trim()
+      }));
+
+      output.textContent = toYAML(newOrder);
+    });
+  </script> -->
+
+</body>
+</html>
